@@ -1,0 +1,21 @@
+{
+  "main": "index.js",
+  "scripts": {
+    "start": "yaml2json .env.yaml > .env.json --pretty && env-cmd -r ./.env.json npx functions-framework --target=github_webhook --signature_type=http",
+    "watch": "npm-watch start",
+    "deploy": "gcloud functions deploy github_webhook --entry-point github_webhook --trigger-http --env-vars-file .env.yaml --runtime=nodejs16"
+  },
+  "watch": {
+    "start": "*.js"
+  },
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^3.1.1",
+    "npm-watch": "^0.11.0",
+    "env-cmd": "^10.1.0",
+    "yamlenv": "^1.0.0",
+    "yamljs": "^0.3.0"
+  },
+  "dependencies": {
+    "@notionhq/client": "^1.0.4"
+  }
+}
